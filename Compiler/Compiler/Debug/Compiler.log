@@ -1,0 +1,7 @@
+﻿  stdafx.cpp
+  AssemblyInfo.cpp
+  Compiler.cpp
+  Generating Code...
+  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
+  AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  Compiler.vcxproj -> C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\Compiler\Debug\Compiler.dll

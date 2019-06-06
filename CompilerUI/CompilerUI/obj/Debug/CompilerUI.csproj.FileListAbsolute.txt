@@ -1,0 +1,10 @@
+C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\bin\Debug\CompilerUI.exe.config
+C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\bin\Debug\CompilerUI.exe
+C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\bin\Debug\CompilerUI.pdb
+C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\obj\Debug\CompilerUI.csprojAssemblyReference.cache
+C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\obj\Debug\CompilerUI.Form1.resources
+C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\obj\Debug\CompilerUI.Properties.Resources.resources
+C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\obj\Debug\CompilerUI.csproj.GenerateResource.cache
+C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\obj\Debug\CompilerUI.csproj.CoreCompileInputs.cache
+C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\obj\Debug\CompilerUI.exe
+C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\obj\Debug\CompilerUI.pdb

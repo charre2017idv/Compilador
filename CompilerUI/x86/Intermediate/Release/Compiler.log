@@ -1,0 +1,8 @@
+﻿  stdafx.cpp
+  AssemblyInfo.cpp
+  Compiler.cpp
+  ErrorModule.cpp
+  LexAnalyzer.cpp
+  Generating Code...
+  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
+  Compiler.vcxproj -> C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\x86\Exe\Release\Compilerx86.dll
