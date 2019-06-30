@@ -15,12 +15,19 @@ namespace Compiler {
 		int m_lineNumber;
 		string m_Lex;
 		TOKEN_TYPE m_Type;
+		map<string, string> m_MapTokens;
 	public:
-		Token(string lex, TOKEN_TYPE tp, int linNum);
-		~Token();
+		vector<string> m_tokenGroup;
+		string m_parsedSrcCode;
+
+		Token();
+		//Token(string line, string lex, string type);
+		void getToken(string line, string lex, string type);
+		string parsedTokens();
+		//~Token();
 		string getLex() const;
-		TOKEN_TYPE getType() const;
-		int getLineNum() const;
+		//TOKEN_TYPE getType() const;
+		//int getLineNum() const;
 	};
 }
 

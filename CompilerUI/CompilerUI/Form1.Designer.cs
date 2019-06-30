@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lexico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,9 +66,6 @@
             this.noMeRepruebePorfaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lexico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -78,13 +79,37 @@
             this.Linea,
             this.Lexico,
             this.Tipo});
-            this.dataGridView1.Location = new System.Drawing.Point(770, 51);
+            this.dataGridView1.Location = new System.Drawing.Point(1102, 51);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(315, 277);
+            this.dataGridView1.Size = new System.Drawing.Size(368, 370);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Linea
+            // 
+            this.Linea.FillWeight = 40F;
+            this.Linea.HeaderText = "Line";
+            this.Linea.Name = "Linea";
+            this.Linea.ReadOnly = true;
+            this.Linea.Width = 40;
+            // 
+            // Lexico
+            // 
+            this.Lexico.FillWeight = 55F;
+            this.Lexico.HeaderText = "Lexem";
+            this.Lexico.Name = "Lexico";
+            this.Lexico.ReadOnly = true;
+            this.Lexico.Width = 55;
+            // 
+            // Tipo
+            // 
+            this.Tipo.FillWeight = 110F;
+            this.Tipo.HeaderText = "Type";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            this.Tipo.Width = 110;
             // 
             // textBox2
             // 
@@ -92,12 +117,12 @@
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox2.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.ForeColor = System.Drawing.Color.White;
-            this.textBox2.Location = new System.Drawing.Point(12, 351);
+            this.textBox2.Location = new System.Drawing.Point(12, 467);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(1073, 120);
+            this.textBox2.Size = new System.Drawing.Size(1458, 191);
             this.textBox2.TabIndex = 2;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
@@ -105,7 +130,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 331);
+            this.label1.Location = new System.Drawing.Point(9, 447);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 17);
             this.label1.TabIndex = 3;
@@ -116,7 +141,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(12, 474);
+            this.label2.Location = new System.Drawing.Point(9, 676);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 17);
             this.label2.TabIndex = 4;
@@ -134,10 +159,10 @@
             this.m_lenght,
             this.m_type,
             this.m_function});
-            this.dataGridView2.Location = new System.Drawing.Point(15, 494);
+            this.dataGridView2.Location = new System.Drawing.Point(12, 696);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(1070, 152);
+            this.dataGridView2.Size = new System.Drawing.Size(1455, 170);
             this.dataGridView2.TabIndex = 5;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
@@ -177,7 +202,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(767, 31);
+            this.label3.Location = new System.Drawing.Point(1099, 31);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 17);
             this.label3.TabIndex = 6;
@@ -195,7 +220,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1097, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1482, 28);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -307,18 +332,24 @@
             // 
             // lexicalAnalysisToolStripMenuItem
             // 
+            this.lexicalAnalysisToolStripMenuItem.Checked = true;
+            this.lexicalAnalysisToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.lexicalAnalysisToolStripMenuItem.Name = "lexicalAnalysisToolStripMenuItem";
             this.lexicalAnalysisToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.lexicalAnalysisToolStripMenuItem.Text = "Lexical Analysis";
             // 
             // syntaxAnalysisToolStripMenuItem
             // 
+            this.syntaxAnalysisToolStripMenuItem.Checked = true;
+            this.syntaxAnalysisToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.syntaxAnalysisToolStripMenuItem.Name = "syntaxAnalysisToolStripMenuItem";
             this.syntaxAnalysisToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.syntaxAnalysisToolStripMenuItem.Text = "Syntax Analysis";
             // 
             // semanticAnalysisToolStripMenuItem
             // 
+            this.semanticAnalysisToolStripMenuItem.Checked = true;
+            this.semanticAnalysisToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.semanticAnalysisToolStripMenuItem.Name = "semanticAnalysisToolStripMenuItem";
             this.semanticAnalysisToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.semanticAnalysisToolStripMenuItem.Text = "Semantic Analysis";
@@ -365,40 +396,16 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(752, 277);
+            this.textBox1.Size = new System.Drawing.Size(1084, 370);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // Linea
-            // 
-            this.Linea.FillWeight = 40F;
-            this.Linea.HeaderText = "Line";
-            this.Linea.Name = "Linea";
-            this.Linea.ReadOnly = true;
-            this.Linea.Width = 40;
-            // 
-            // Lexico
-            // 
-            this.Lexico.FillWeight = 55F;
-            this.Lexico.HeaderText = "Lexem";
-            this.Lexico.Name = "Lexico";
-            this.Lexico.ReadOnly = true;
-            this.Lexico.Width = 55;
-            // 
-            // Tipo
-            // 
-            this.Tipo.FillWeight = 110F;
-            this.Tipo.HeaderText = "Type";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.ReadOnly = true;
-            this.Tipo.Width = 110;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1097, 658);
+            this.ClientSize = new System.Drawing.Size(1482, 1055);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView2);
@@ -408,8 +415,11 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CompilerUI - Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

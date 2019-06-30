@@ -5,9 +5,65 @@
 Compiler::LexAnalyzer::LexAnalyzer( ErrorModule ^ errorMod)
 {
 	m_refErrorMod = errorMod;
-
 }
 
+void Compiler::LexAnalyzer::tokenComp(string tok)
+{
+	string s;
+	std::size_t founderer = tok.find(".");
+	if (tok != "")
+	{
+		char va = tok.at(0);
+		s = va;
+	}
+	if (find(m_keyword.begin(), m_keyword.end(), tok) != m_keyword.end())
+	{
+		addToken(out_string2, tok, "KEYWORD");
+	}
+	else if (find(m_separator.begin(), m_separator.end(), tok) != m_separator.end())
+	{
+		addToken(out_string2, tok, "SEPARATOR");
+	}
+	else if (find(m_op_dim.begin(), m_op_dim.end(), tok) != m_op_dim.end())
+	{
+		addToken(out_string2, tok, "DIMENSION_OPERATOR");
+	}
+	else if (find(m_op_grup.begin(), m_op_grup.end(), tok) != m_op_grup.end())
+	{
+		addToken(out_string2, tok, "GROUPING_OPERATOR");
+	}
+	else if (founderer != std::string::npos)
+	{
+		addToken(out_string2, tok, "FLOAT_NUMBER");
+	}
+	else if (find(m_digit.begin(), m_digit.end(), s) != m_digit.end())
+	{
+		addToken(out_string2, tok, "INT_NUMBER");
+	}
+	else if (find(m_op_log.begin(), m_op_log.end(), tok) != m_op_log.end())
+	{
+		addToken(out_string2, tok, "OP_LOGICO");
+	}
+	else if (find(m_op_arit.begin(), m_op_arit.end(), tok) != m_op_arit.end())
+	{
+		addToken(out_string2, tok, "OP_ARITMETICO");
+	}
+	else if (find(m_asignacion.begin(), m_asignacion.end(), tok) != m_asignacion.end())
+	{
+		addToken(out_string2, tok, "ASIGNATION");
+	}
+	else if (tok.front() == '"')
+	{
+		addToken(out_string2, tok, "STRING");
+	}
+	else
+	{
+		if (tok != "")
+		{
+			addToken(out_string2, tok, "ID");
+		}
+	}
+}
 
 void Compiler::LexAnalyzer::clearTokens()
 {
@@ -15,499 +71,373 @@ void Compiler::LexAnalyzer::clearTokens()
 
 bool Compiler::LexAnalyzer::parseSourceCode(const char * srcCode)
 {
-	//StateManage.AsignType(src, m_keywords);
 	string str;
-	string temp_string;
-
 	int size = strlen(srcCode);
-
 	// Separate the srcCode
-	/*
 	for (int i = 0; i < size; i++)
 	{
-		// Concatenate the string if the srcCode is not the token
-		if (srcCode[i] != ' ' || srcCode[i] != ',')
+		prevToken = srcCode[i - 1];
+		currentToken = srcCode[i];
+		nextToken = srcCode[i + 1];
+		if (m_state == 0)
 		{
-			str += srcCode[i];
-		}
-
-		if (srcCode[i] == '"')
-		{
-			//temp_string = srcCode[i+1];
-			while (srcCode[i + 1] != '"')
+			// Simbolors, op_log, separadores
+			if (currentToken == ',' || currentToken == ':' || currentToken == ';' || currentToken == '\n' || currentToken == '(' || currentToken == ')' || currentToken == '[' || currentToken == ']' || currentToken == '{' || currentToken == '}' || currentToken == '+' || currentToken == '-' || currentToken == '/' || currentToken == '*' || currentToken == '!' || currentToken == '^' || currentToken == '@' || currentToken == '$' || currentToken == '#' || currentToken == '_' )
 			{
-				str += srcCode[i+1];
-				i++;
+				m_state = 2;
 			}
-
-			string cad = '"' + str + '"';
-			temp_Code.push_back(cad);
-			i++;
-			str.clear();
+			// int
+			if (currentToken >= '0' && currentToken <= '9')
+			{
+				m_state = 3;
+			}
+			// float
+			// Error float
+			if (currentToken == '.' && isdigit(nextToken))
+			{
+				m_state = 4;
+			}
+			else if (currentToken == '.')
+			{
+				m_state = 4;
+			}
+			if ( (currentToken >= '0' && currentToken <= '9') && nextToken == '.'  && (nextToken >= '0' && nextToken <= '9'))
+			{
+				m_state = 4;
+			}
+			// string
+			if (currentToken == '"')
+			{
+				m_state = 5;
+			}
+			// Comment
+			if (currentToken == '/' && nextToken == '*')
+			{
+				m_state = 6;
+			}
+			// And
+			if (currentToken == '&' && nextToken == '&')
+			{
+				m_state = 7;
+			}
+			// Equal Equal
+			if (currentToken == '=' && nextToken == '=')
+			{
+				m_state = 8;
+			}
+			// Asignacion
+			if ((prevToken != '=' && currentToken == '=' && nextToken != '=') || (prevToken != '&' && currentToken == '&' && nextToken != '&'))
+			{
+				m_state = 9;
+			}
+			// letter
+			if ((currentToken >= 'a' && currentToken <= 'z') || (currentToken >= 'A' && currentToken <= 'Z'))
+			{
+				m_state = 1;
+			}
+			/* Errors of Lexem */
+			// Error Op Log
+			if (currentToken == '&' && nextToken != '&')
+			{
+				str = currentToken;
+				String^ ErrorDesc = gcnew String(str.c_str());
+				String^ Error;
+				Error = _INVALID_OP_LOG;
+				m_refErrorMod->addError(m_refErrorMod->lexError, line, Error, ErrorDesc);
+				//isError = true;
+				i++;
+				str.clear();
+				m_state = 0;
+			}
+			// Error Char
+			if (find(m_general.begin(), m_general.end(), currentToken) != m_general.end())
+			{
+			}
+			else
+			{
+				m_state = 10;
+				//errores.push_back(currentToken);
+			}
 		}
 
-		// Push to the temp vector the actual string if the srccode is equal to the token of space and separations
-		if (srcCode[i + 1] == ' ' || srcCode[i + 1] == '\t' || srcCode[i + 1] == '\n' || srcCode[i + 1] == '\0')
-		{
-			temp_Code.push_back(str);
-			i++;
-			str.clear();
-		}
-
-		// Push to the temp vector the actual string if the srccode is equal to the token of ':'
-		if (srcCode[i + 1] == ':')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back(":");
-			i++;
-			str.clear();
-		}
-
-		// Push to the temp vector the actual string if the srccode is equal to the token of '('
-		if (srcCode[i + 1] == '(')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("(");
-			i++;
-			str.clear();
-		}
-
-		// Push to the temp vector the actual string if the srccode is equal to the token of ')'
-		if (srcCode[i + 1] == ')')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back(")");
-			i++;
-			str.clear();
-		}
-
-		// Push to the temp vector the actual string if the srccode is equal to the token of '{'
-		if (srcCode[i + 1] == '{')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("{");
-			i++;
-			str.clear();
-		}
-
-		// Push to the temp vector the actual string if the srccode is equal to the token of '}'
-		if (srcCode[i + 1] == '}')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("}");
-			i++;
-			str.clear();
-		}
-
-		// Push to the temp vector the actual string if the srccode is equal to the token of ';'
-		if (srcCode[i + 1] == ';')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back(";");
-			i++;
-			str.clear();
-		}
-
-		// Push to the temp vector the actual string if the srccode is equal to the token of ','
-		if (srcCode[i + 1] == ',')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back(",");
-			i++;
-			str.clear();
-		}
-	}
-	*/
-	for (int i = 0; i < size; i++)
-	{
-		if (srcCode[i] != ' ' || srcCode[i] != ',' )
-		{
-			str += srcCode[i];
-		}
-		if (srcCode[i + 1] == ' ' || srcCode[i + 1] == '\t'  || srcCode[i + 1] == '\0')
-		{
-			temp_Code.push_back(str);
-			i++;
-			str.clear();
-		}
-		if (srcCode[i] == '\n' || srcCode[i + 1] == '\n')
-		{
-			temp_Code.push_back(str);
-			//temp_Code.push_back("\n");
-			i++;
-			str.clear();
-		}
-		// Delimitadores
-		if (srcCode[i + 1] == ',')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back(",");
-			i++;
-			str.clear();
-		}
-		if (srcCode[i + 1] == ':')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back(":");
-			i++;
-			str.clear();
-		}
-		if (srcCode[i + 1] == ';')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back(";");
-			i++;
-			str.clear();
-		}
-		// Operadores Agrupacion
-		if (srcCode[i + 1] == '(')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("(");
-			i++;
-			str.clear();
-		}
-		if (srcCode[i + 1] == ')')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back(")");
-			i++;
-			str.clear();
-		}
-		if (srcCode[i + 1] == '{')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("{");
-			i++;
-			str.clear();
-		}
-		if (srcCode[i + 1] == '}')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("}");
-			i++;
-			str.clear();
-		}
-		if (srcCode[i + 1] == '[')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("[");
-			i++;
-			str.clear();
-		}
-		if (srcCode[i + 1] == ']')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("]");
-			i++;
-			str.clear();
-		}
-		// Asignacion
-		if (srcCode[i + 1] == '=')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("=");
-			i++;
-			str.clear();
-		}
-		// Relacionales
-		if (srcCode[i + 1] == '<=')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("<=");
-			i++;
-			str.clear();
-		}
-		if (srcCode[i + 1] == '>=')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back(">=");
-			i++;
-			str.clear();
-		}
-		// Operadores logicos
-		if (srcCode[i + 1] == '&&')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("&&");
-			i++;
-			str.clear();
-		}
-		if (srcCode[i + 1] == '||')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("||");
-			i++;
-			str.clear();
-		}
-		// Operadores Logicos
-		if (srcCode[i + 1] == '+')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("+");
-			i++;
-			str.clear();
-		}
-		if (srcCode[i + 1] == '-')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("-");
-			i++;
-			str.clear();
-		}
-		//if (srcCode[i + 1] == '*')
-		//{
-		//	temp_Code.push_back(str);
-		//	temp_Code.push_back("*");
-		//	i++;
-		//	str.clear();
-		//}
-		if (srcCode[i + 1] == '%')
-		{
-			temp_Code.push_back(str);
-			temp_Code.push_back("%");
-			i++;
-			str.clear();
-		}
 		
-		// Logico Unario
-		if (srcCode[i + 1] == '!')
+		// letter
+		if (m_state == 1)
 		{
+			if (currentToken != ' ' && currentToken != ','  && currentToken != '.' && currentToken != '\t' && currentToken != '\n' && currentToken != '\r\n')
+			{
+				str += currentToken;
+			}
+			if (nextToken == ' ' || nextToken == ',' || nextToken == '.' || nextToken == '\0' || nextToken == '\n' || nextToken == '\r\n' || nextToken == '\t' || nextToken == ';' || nextToken == ':' || nextToken == '(' || nextToken == ')' || nextToken == '[' || nextToken == ']' || nextToken == '{' || nextToken == '}') // agregar tabulador en condicion
+			{
+				// HACER FUNCION COMPROBACION Y ASIGNAR AHI LOS TIPOS
+				temp_Code.push_back(str);
+				tokenComp(str);
+				//i++;
+				str.clear();
+				m_state = 0;
+			}
+		}
+		// Separadores
+		if (m_state == 2)
+		{
+			str += currentToken;
 			temp_Code.push_back(str);
-			temp_Code.push_back("!");
-			i++;
+			tokenComp(str);
 			str.clear();
+			m_state = 0;
+		}
+		// Int
+		if (m_state == 3)
+		{
+			if (currentToken != ' ' && currentToken != '\t' && currentToken != '.')
+			{
+				str += currentToken;
+			}
+			if (currentToken == '.')
+			{
+				m_state = 4;
+			}
+			if (nextToken == ' ' || isalpha(nextToken) || nextToken == ';' || nextToken == '\n' || nextToken == '\0' || nextToken == ']' || nextToken == ')')
+			{
+				temp_Code.push_back(str);
+				tokenComp(str);
+				//i++;
+				str.clear();
+				m_state = 0;
+			}
+		}
+		// float
+		if (m_state == 4)
+		{
+			if (currentToken != ' ' && currentToken != '\t' )
+			{
+				str += currentToken;
+			}
+			//if (find(m_letters.begin(), m_letters.end(), currentToken) != m_letters.end())
+			//{
+			//	String^ ErrorDesc = gcnew String(str.c_str());
+			//	String^ Error;
+			//	Error = _COMMENT_NOT_CLOSED;
+			//	m_refErrorMod->addError(m_refErrorMod->lexError, line, Error, ErrorDesc);
+			//	//isError = true;
+			//	i++;
+			//	str.clear();
+			//	m_state = 0;
+			//}	
+			if (nextToken == ' ' || nextToken == ';' || nextToken == '\n' || nextToken == '\0' || nextToken == ']' || nextToken == ')')
+			{
+				temp_Code.push_back(str);
+				tokenComp(str);
+				//i++;
+				str.clear();
+				m_state = 0;
+			}
 		}
 		// String
-		if (srcCode[i] == '"')
+		if (m_state == 5)
 		{
-			str.clear();
-			//temp_string = srcCode[i+1];
+			str += currentToken;
 
-			while (srcCode[i + 1] != '"')
+			if (nextToken == '"')
 			{
-				str += srcCode[i + 1];
+				temp_Code.push_back(str + nextToken);
+				tokenComp(str + nextToken);
 				i++;
+				str.clear();
+				m_state = 0;
 			}
-
-			string cad = '"' + str + '"';
-			temp_Code.push_back(cad);
-			i++;
-			str.clear();
-		}
-		// Comentario
-		if (srcCode[i] == '/')
-		{
-			str.clear();
-			//temp_string = srcCode[i+1];
-
-			while (srcCode[i + 1] != '/')
+			if (nextToken == '\0')
 			{
-				str += srcCode[i + 1];
+				//str = currentToken;
+				String^ ErrorDesc = gcnew String(str.c_str());
+				String^ Error;
+				Error = _STRING_NOT_CLOSED;
+				m_refErrorMod->addError(m_refErrorMod->lexError, line, Error, ErrorDesc);
+				//isError = true;
 				i++;
+				str.clear();
+				m_state = 0;
 			}
-
-			string cad = '/' + str + '/';
-			temp_Code.push_back(cad);
-			i++;
-			str.clear();
 		}
-		//
-		if (srcCode[i] == '#')
+		// Comment
+		if (m_state == 6)
 		{
-			//temp_Code.push_back(str);
-			temp_Code.push_back("#");
-			i++;
-			str.clear();
+			str += currentToken;
+			if (currentToken == '*' && nextToken == '/')
+			{
+				temp_Code.push_back(str + nextToken);
+				tokenComp(str + nextToken);
+				i++;
+				str.clear();
+				m_state = 0;
+			}
+			if (nextToken == '\0')
+			{
+				//str = currentToken;
+				String^ ErrorDesc = gcnew String(str.c_str());
+				String^ Error;
+				Error = _COMMENT_NOT_CLOSED;
+				m_refErrorMod->addError(m_refErrorMod->lexError, line, Error, ErrorDesc);
+				//isError = true;
+				i++;
+				str.clear();
+				m_state = 0;
+			}
 		}
-		if (srcCode[i] == '$' || srcCode[i+1] == '$')
+		// And
+		if (m_state == 7)
 		{
-			//temp_Code.push_back(str);
- 			temp_Code.push_back("$");
+			str += currentToken;
+			temp_Code.push_back(str + nextToken);
+			tokenComp(str + nextToken);
+			str.clear();
+			m_state = 0;
+		}
+		// ==
+		if (m_state == 8)
+		{
+			str += currentToken;
+			temp_Code.push_back(str + nextToken);
+			tokenComp(str + nextToken);
+			str.clear();
+			m_state = 0;
+		}
+		if (m_state == 9)
+		{
+			str += currentToken;
+			temp_Code.push_back(str);
+			tokenComp(str);
+			str.clear();
+			m_state = 0;
+		}
+		// Errors
+		if (m_state == 10)
+		{
+			str = currentToken;
+			String^ ErrorDesc = gcnew String(str.c_str());
+			String^ Error;
+			Error = LEX_INVALID_CHAR;
+			m_refErrorMod->addError(m_refErrorMod->lexError, line, Error, ErrorDesc);
+			//isError = true;
 			i++;
 			str.clear();
+			m_state = 0;
 		}
 	}
+
 	// Asignar tipo y lexema
-	string s;
-	string s2;
+	
 	for (size_t i = 0; i < temp_Code.size(); i++)
 	{
-		std::size_t founderer = temp_Code[i].find(".");
-		if (temp_Code[i] != "")
-		{
-			char va = temp_Code[i].at(0);
-			//char vaz = temp_Code[i].at(1);
-			s = va;
-			//s2 = vaz;
-		}
-		if (find(m_keyword.begin(), m_keyword.end(), temp_Code[i]) != m_keyword.end())
-		{
-			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("KEYWORD");
-			// Element in vector.
-		}
-		else if (find(m_separator.begin(), m_separator.end(), temp_Code[i]) != m_separator.end())
-		{
-			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("SEPARATOR");
-			// Element in vector.
-		}
-		else if (find(m_op_dim.begin(), m_op_dim.end(), temp_Code[i]) != m_op_dim.end())
-		{
-			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("OP_DIMENSIONAL");
-			// Element in vector.
-		}
-		else if (find(m_digit.begin(), m_digit.end(), s) != m_digit.end())
-		{
-			
-			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("DIGIT");
-		}
-		else if (find(m_op_log.begin(), m_op_log.end(), temp_Code[i]) != m_op_log.end())
-		{
-			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("OP_LOGICO");
-		}
-		else if (find(m_op_arit.begin(), m_op_arit.end(), temp_Code[i]) != m_op_arit.end())
-		{
-			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("OP_ARITMETICO");
-		}
-		else if (find(m_asignacion.begin(), m_asignacion.end(), temp_Code[i]) != m_asignacion.end())
-		{
-			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("ASIGNACION");
-		}
-		else if (founderer != std::string::npos)
-		{
-			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("FLOAT");
-		}
-		else
-		{
-			if (temp_Code[i] != "")
-			{
-				m_tokens.Lexem.push_back(temp_Code[i]);
-				m_tokens.Type.push_back("ID");
-			}
-			
-			//if(find(m_simbolos.begin(), m_simbolos.end(), temp_Code[i]) != m_simbolos.end())
-			//{
-			//	Error.push_back(LEX_INVALID_CHAR);
-			//}
-		}
-	}
-
-	// Tokenize the temp_Code stored
-	// Error por string
-
-	int line = 0;
-	for (size_t i = 0; i < m_tokens.Lexem.size(); i++)
-	{
-		isError = false;
 		// If line jump is find, the cout line increases
-		String^ Desc = gcnew String(m_tokens.Lexem[i].c_str());
-		size_t found = m_tokens.Lexem[i].find('\n');
+		size_t found = temp_Code[i].find('\n');
 		if (found != string::npos)
 		{
 			line++;
 		}
+	}
+	// Tokenize the temp_Code store
+	int line = 0;
+	for (size_t i = 0; i < m_tokens.Lexem.size(); i++)
+	{
+		isError = false;
+
+		// If line jump is find, the cout line increases
+		String^ ErrorDesc = gcnew String(m_tokens.Lexem[i].c_str());
+		size_t found = m_tokens.Lexem[i].find('\n');
+		if (found != string::npos)
+			line++;
+		// Cast the 'line' to string
 		out_string2 = to_string(line);
-		String^ Error ;
-		Error = LEX_INVALID_CHAR;
 
-		std::size_t found4 = m_tokens.Lexem[i].find('/*');
-		if (found4 != std::string::npos)
-		{
-			std::size_t found5 = m_tokens.Lexem[i].find("*/");
-			if (found5 != std::string::npos)
-			{
-				Error = _COMMENT_NOT_CLOSED;
-				isError = false;
-			}
-		}
-
-
-		std::size_t founding = m_tokens.Lexem[i].find('"');
-		if (founding != std::string::npos)
-		{
-			std::size_t end = m_tokens.Lexem[i].find("\r\n");
-			if (end != std::string::npos)
-			{
-				Error = _COMMENT_NOT_CLOSED;
-				isError = false;
-			}
-		}
-
-		std::size_t founder = m_tokens.Lexem[i].find("#");
-		if (founder != std::string::npos)
-		{
-			m_refErrorMod->addError(m_refErrorMod->lexError, line, Error, Desc);
-			isError = true;
-		}
-		std::size_t found2 = m_tokens.Lexem[i].find("$");
-		if (found2 != std::string::npos)
-		{
-			m_refErrorMod->addError(m_refErrorMod->lexError, line, Error, Desc);
-			isError = true;
-		}
 		std::size_t found3 = m_tokens.Lexem[i].find("\n");
 		if (found3 != std::string::npos)
 		{
 			isError = true;
 		}
-
+		// Concatenate in strings the group of line, lexem and type
 		if (isError == false)
 		{
-			// Concatenate in strings the group of line, lexem and type
 			string ab = out_string2 + "@" + m_tokens.Lexem[i] + "@" + m_tokens.Type[i] + "@";
-			BA.push_back(ab);
+			LLT.push_back(ab);
 			isError = false;
-		}
-
-
-		//isError == false;
-		//else if (m_tokens.Lexem[i] == "#" || m_tokens.Lexem[i] == "$")
-		//{
-		//
-		//	BA.push_back("@");
-		//}
-		
+		}	
 	}
-
-
-	// Concatenate all the code in a single string
-	for (size_t i = 0; i < BA.size(); i++)
-	{
-		m_parsedSrcCode += BA[i];
-	}
-	
-	
 	return false;
+}
+
+string Compiler::LexAnalyzer::parsedTokens()
+{
+	// Concatenate all the code in a single string
+	for (size_t i = 0; i < LLT.size(); i++)
+	{
+		m_parsedSrcCode += LLT[i];
+	}
+	return m_parsedSrcCode;
 }
 
 void Compiler::LexAnalyzer::getTokens(vector<Token*>* tokensVec)
 {
+	
 }
 
 Compiler::Token * Compiler::LexAnalyzer::getNextToken()
 {
-	return nullptr;
+	//Token* t = nullptr;
+	string t;
+	if (m_currentToken < LLT.size())
+	{
+		t = LLT[++m_currentToken];
+	}
+
+	return nullptr;// Dice cual es el ultimo Token que ha procesado el analizador sintactico
 }
 
-Compiler::Token * Compiler::LexAnalyzer::getPrevToken()
+string Compiler::LexAnalyzer::getNextTokenS()
 {
-	return nullptr;
+	//Token* t = nullptr;
+	string str;
+	string t;
+	
+	m_currentToken++;
+	if (m_currentToken < m_tokens.Lexem.size())
+	{
+		t = m_tokens.Lexem[m_currentToken];
+	}
+
+	return t;// Dice cual es el ultimo Token que ha procesado el analizador sintactico
 }
 
-Compiler::Token * Compiler::LexAnalyzer::peekToken()
+string Compiler::LexAnalyzer::getPrevTokenS()
 {
-	return nullptr;
+	//Token* t = nullptr;
+	string str;
+	string t;
+
+	
+	if (m_currentToken < m_tokens.Lexem.size())
+	{
+		t = m_tokens.Lexem[m_currentToken];
+	}
+
+	return t;
 }
 
-void Compiler::LexAnalyzer::addToken(const char * lex, int lineNum, TOKEN_TYPE tp)
+string Compiler::LexAnalyzer::peekToken(int i)
 {
+	//Token* t = nullptr;
+	string str;
+	string t;
+
+	t = m_tokens.Lexem[i];
+
+	return t;
+}
+
+void Compiler::LexAnalyzer::addToken(string lineNum, string lex, string type)
+{
+	m_tokens.Lexem.push_back(lex);
+	m_tokens.Type.push_back(type);
 }
 

@@ -13,54 +13,126 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\LexAnalyzer">
+      <UniqueIdentifier>{e8bda78f-868e-4590-b414-c818f6c4cb63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SemAnalyzer">
+      <UniqueIdentifier>{c8633ff2-6ffb-46c2-9f58-63d754feb2d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Globals">
+      <UniqueIdentifier>{56efc06b-7167-430c-830f-c5ac6e48ad5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LexAnalyzer">
+      <UniqueIdentifier>{0ccd2114-e325-4941-80e0-37ae2aa01357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SemAnalyzer">
+      <UniqueIdentifier>{08eaea16-0181-4478-ba64-11e1431a0ace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Goblas">
+      <UniqueIdentifier>{b1e76b39-dbac-43fe-8bc1-19668a46a216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SynAnalysis">
+      <UniqueIdentifier>{e26c1e07-01cf-4983-9dd0-570a956baca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SynAnalysis">
+      <UniqueIdentifier>{281586af-725d-40ad-acf3-c20c32e3399d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Compiler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LexAnalyzer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\LexAnalyzer</Filter>
     </ClInclude>
-    <ClInclude Include="ErrorModule.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="SemanticAnalysis.h">
+      <Filter>Header Files\SemAnalyzer</Filter>
     </ClInclude>
     <ClInclude Include="CStateManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\LexAnalyzer</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorModule.h">
+      <Filter>Header Files\Globals</Filter>
     </ClInclude>
     <ClInclude Include="Token.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="Compiler.h">
+      <Filter>Header Files\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoLocal.h">
+      <Filter>Header Files\SynAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="NodoGlobal.h">
+      <Filter>Header Files\SynAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntaxAnalysis.h">
+      <Filter>Header Files\SynAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntaxState.h">
+      <Filter>Header Files\SynAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntaxState_Program.h">
+      <Filter>Header Files\SynAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="TabSymbol.h">
+      <Filter>Header Files\SynAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntaxState_Var.h">
+      <Filter>Header Files\SynAnalysis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Compiler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AssemblyInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CStateManager.cpp">
+      <Filter>Source Files\LexAnalyzer</Filter>
+    </ClCompile>
     <ClCompile Include="LexAnalyzer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\LexAnalyzer</Filter>
+    </ClCompile>
+    <ClCompile Include="SemanticAnalysis.cpp">
+      <Filter>Source Files\SemAnalyzer</Filter>
+    </ClCompile>
+    <ClCompile Include="Compiler.cpp">
+      <Filter>Source Files\Goblas</Filter>
     </ClCompile>
     <ClCompile Include="ErrorModule.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CStateManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Goblas</Filter>
     </ClCompile>
     <ClCompile Include="Token.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Goblas</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoGlobal.cpp">
+      <Filter>Source Files\SynAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoLocal.cpp">
+      <Filter>Source Files\SynAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntaxAnalysis.cpp">
+      <Filter>Source Files\SynAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntaxState.cpp">
+      <Filter>Source Files\SynAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntaxState_Program.cpp">
+      <Filter>Source Files\SynAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="TabSymbol.cpp">
+      <Filter>Source Files\SynAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntaxState_Var.cpp">
+      <Filter>Source Files\SynAnalysis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

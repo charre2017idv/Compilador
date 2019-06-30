@@ -8,14 +8,36 @@ Compiler::Manager::Manager()
 {
 	err = gcnew ErrorModule;
 	lex = new LexAnalyzer(err);
+	SymbolTable = new TabSymbol;
+	SemanticAnalisis = new SemanticAnalysis;
+	SyntaxAnalisis = new SyntaxAnalysis(lex,err,SymbolTable); // Add the point of SemanticAnalisis
 }
 
 Compiler::Manager::~Manager()
 {
+	// Delete lex analysis
 	if (lex!=nullptr)
 	{
 		delete lex;
 		lex = nullptr;
+	}
+	// Delete Symbol Table
+	if (SymbolTable != nullptr)
+	{
+		delete SymbolTable;
+		SymbolTable = nullptr;
+	}
+	// Delete SyntaxAnalisis
+	if (SyntaxAnalisis != nullptr)
+	{
+		delete SyntaxAnalisis;
+		SyntaxAnalisis = nullptr;
+	}
+	// Delete SemanticAnalisis
+	if (SemanticAnalisis != nullptr)
+	{
+		delete SemanticAnalisis;
+		SemanticAnalisis = nullptr;
 	}
 }
 
@@ -27,75 +49,61 @@ void Compiler::Manager::lexAnalysis(String ^ srcCode)
 	}
 }
 
+void Compiler::Manager::checkSyntax()
+{
+	if (SyntaxAnalisis != nullptr)
+	{
+		SyntaxAnalisis->checkSyntax();
+	}
+}
+
 cli::array<String^>^ Compiler::Manager::compileProgram(String ^ srcCode)
 {
-	
-	// Analize the srcCode
+	// analyze the srcCode
 	lexAnalysis(srcCode);
+	// Analysis syntactic
+	checkSyntax();
 	/* Reserve Memory */
 	int arrSize = lex->m_tokens.Lexem.size();
 	compilationDetails = gcnew cli::array<String^>(arrSize);
 
-	// Analyze Errors
-	// 1)  Buscar en el indice en busca de error, si no lohay acumular su entrada para comprobar que hay datos corrector
-	// 2) Si hay errores agregarlos por medio de la clase error al modulo de erres y acumular los mismos
-	// 3) Obener los errores y concatenarlos, posteriormente llamar al resultado en el output del formulario
-	
-
-	int line = 0;
-	String^ out_string;
-	for (size_t i = 0; i < err->m_errorsArray->Length; i++)
-	{
-		// Concatenate in strings the group of line, lexem and type
-		
-		out_string += err->m_errorsArray[i] + "\r\n";
+	for (size_t i = 0; i < err->m_errorsArray->Length; i++)						// Concatenate in strings the group of line, lexem and type of errors
+	{ 
+		m_errorString += err->m_errorsArray[i] + "\r\n";
 	}
 	
+	//string temp = lex->m_parsedSrcCode;
+	//string str;
+	//vector <string> temp_Words;
+	//for (int i = 0; i < temp.size(); i++)
+	//{
+	//	if (temp[i] != '@')
+	//	{
+	//		str += temp[i];
+	//	}
+	//	if (temp[i + 1] == '@')
+	//	{
+	//		str = "";
+	//		i++;
+	//	}
+	//	if (temp[i] == '\n')
+	//	{
+	//		i++;
+	//	}
+	//}
+	
+	// Cast lexem string to tokenized String
+	TokenaizedSTR = gcnew String(lex->parsedTokens().c_str());
+	SymbolsSTR = gcnew String(SyntaxAnalisis->m_parsedNode.c_str());
 
-
-
-	string temp = lex->m_parsedSrcCode;
-	string str;
-	vector <string> temp_Words;
-	for (int i = 0; i < temp.size(); i++)
-	{
-		if (temp[i] != '@')
-		{
-			str += temp[i];
-			//i++;
-		}
-		if (temp[i + 1] == '@')
-		{
-
-			//Words.Add(str);
-			str = "";
-			i++;
-		}
-		if (temp[i] == '\n')
-		{
-			i++;
-		}
-		if (temp_Words.size() == 3)
-		{
-			//String^ line = gcnew String(temp_Words[0].c_str());
-			//int line = std::atoi(temp_Words[0].c_str());
-			//String^ lexem = gcnew String(temp_Words[1].c_str());
-			//err->addError(err->lexError, line, Error, lexem);
-			//temp_Words.clear();
-		}
-	}
-
-	// Cast string to String
-
-	TokenaizedSTR = gcnew String(lex->m_parsedSrcCode.c_str());
-	//ErrorSTR = gcnew String(err->getErrors()->ToString.c_str());
 	// Sending the information to the UI
 	compilationDetails[0] = gcnew String("___CompileOK___");
 	compilationDetails[1] = gcnew String(TokenaizedSTR);
-	compilationDetails[2] = gcnew String(out_string);
+	compilationDetails[2] = gcnew String(m_errorString);
+	compilationDetails[3] = gcnew String(SymbolsSTR);
+	// Clean Up
 	lex->clearTokens();
 	err->clearErrors();
-	//parseSourceCode(srcCode);
 
 	return compilationDetails;
 	// TODO: insert return statement here

@@ -2,6 +2,14 @@ c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermed
 c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\vc141.pdb
 c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\stdafx.obj
 c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\token.obj
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\tabsymbol.obj
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\syntaxstate_var.obj
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\syntaxstate_program.obj
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\syntaxstate.obj
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\syntaxanalysis.obj
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\semanticanalysis.obj
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\nodolocal.obj
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\nodoglobal.obj
 c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\lexanalyzer.obj
 c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\errormodule.obj
 c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\cstatemanager.obj

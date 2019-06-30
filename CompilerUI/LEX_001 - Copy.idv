@@ -1,5 +1,5 @@
 zzvar a,b,c123	:int;
-
+&
 main)(
 {
    var b,MAIN: float   ;
@@ -13,12 +13,18 @@ bbb
 99
 100 #
 
-$$
+3.a
+4.	
+$$ 
 
 39
 "Estring toro"
 $
 var prueba = 56.4;
-/* el codigo no compilo xD
+/* el codigo no compilo xD 
 
 #
+
+" Esto es un error de tipo string
+
+int main

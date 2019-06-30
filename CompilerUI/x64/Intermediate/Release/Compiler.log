@@ -1,20 +1,35 @@
 ﻿  stdafx.cpp
   AssemblyInfo.cpp
   Compiler.cpp
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\compiler.cpp(36): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\compiler.cpp(51): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30C0' cannot be represented in the current code page (1252)
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30F3' cannot be represented in the current code page (1252)
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\compiler.cpp(67): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\compiler.cpp(72): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   CStateManager.cpp
 c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\cstatemanager.cpp(99): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   ErrorModule.cpp
   LexAnalyzer.cpp
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.cpp(22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.cpp(421): warning C4305: 'argument': truncation from 'int' to 'const _Elem'
-          with
-          [
-              _Elem=char
-          ]
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.cpp(421): warning C4309: 'argument': truncation of constant value
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30C0' cannot be represented in the current code page (1252)
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30F3' cannot be represented in the current code page (1252)
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.cpp(75): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  NodoGlobal.cpp
+  NodoLocal.cpp
+  SemanticAnalysis.cpp
+  SyntaxAnalysis.cpp
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30C0' cannot be represented in the current code page (1252)
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30F3' cannot be represented in the current code page (1252)
+  SyntaxState.cpp
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30C0' cannot be represented in the current code page (1252)
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30F3' cannot be represented in the current code page (1252)
+  SyntaxState_Program.cpp
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30C0' cannot be represented in the current code page (1252)
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30F3' cannot be represented in the current code page (1252)
+  SyntaxState_Var.cpp
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30C0' cannot be represented in the current code page (1252)
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30F3' cannot be represented in the current code page (1252)
+  TabSymbol.cpp
   Token.cpp
   Generating Code...
+c:\users\personal\documents\idv17c\cuatri 6\compiladores\compiler\compiler\syntaxstate_program.cpp(21): warning C4700: uninitialized local variable 'isChecking' used
   .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
   Compiler.vcxproj -> C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\x64\Exe\Release\Compilerx64.dll

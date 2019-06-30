@@ -98,8 +98,9 @@ namespace CompilerUI
                 String temp2 = output[0];
                 textBox2.Text = temp2;
 
-                String temp = output[1]; // Temporal String for the concatenated string of the tokens
-                String Errors = output[2]; // Temporal String for the concatenated string of the tokens
+                String temp = output[1];                                        // Temporal String for the concatenated string of the tokens
+                String Errors = output[2];                                      // Temporal String for the concatenated string of the tokens
+                String Symbols = output[3];                                      // Temporal String for the concatenated string of the tokens
              //   textBox2.Text = "---------- Error List ----------";
                 textBox2.Text = Errors;
                 // Separate the string and get the values into the tokens grid
