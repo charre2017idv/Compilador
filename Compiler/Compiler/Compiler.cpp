@@ -2,7 +2,7 @@
 #include "ErrorModule.h"
 #include "Compiler.h"
 
-
+// <! Warning : Github - Branch 'Development'>
 
 Compiler::Manager::Manager()
 {

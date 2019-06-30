@@ -7,3 +7,13 @@ C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\b
 C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\bin\x64\Debug\CompilerUI.pdb
 C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.exe
 C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.pdb
+C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\bin\x64\Debug\CompilerUI.exe.config
+C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\bin\x64\Debug\CompilerUI.exe
+C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\bin\x64\Debug\CompilerUI.pdb
+C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.csprojAssemblyReference.cache
+C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.Form1.resources
+C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.Properties.Resources.resources
+C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.csproj.GenerateResource.cache
+C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.csproj.CoreCompileInputs.cache
+C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.exe
+C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.pdb
