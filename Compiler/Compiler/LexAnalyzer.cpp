@@ -350,6 +350,7 @@ bool Compiler::LexAnalyzer::parseSourceCode(const char * srcCode)
 			line++;
 		// Cast the 'line' to string
 		out_string2 = to_string(line);
+      m_tokens.line.push_back(out_string2);
 
 		std::size_t found3 = m_tokens.Lexem[i].find("\n");
 		if (found3 != std::string::npos)
@@ -359,7 +360,7 @@ bool Compiler::LexAnalyzer::parseSourceCode(const char * srcCode)
 		// Concatenate in strings the group of line, lexem and type
 		if (isError == false)
 		{
-			string ab = out_string2 + "@" + m_tokens.Lexem[i] + "@" + m_tokens.Type[i] + "@";
+			string ab = out_string2 + "@" + m_tokens.Lexem[i] + "@" + m_tokens.type[i] + "@";
 			LLT.push_back(ab);
 			isError = false;
 		}	
@@ -438,6 +439,6 @@ string Compiler::LexAnalyzer::peekToken(int i)
 void Compiler::LexAnalyzer::addToken(string lineNum, string lex, string type)
 {
 	m_tokens.Lexem.push_back(lex);
-	m_tokens.Type.push_back(type);
+	m_tokens.type.push_back(type);
 }
 

@@ -419,40 +419,40 @@ void CStateManager::AsignType(const char * srcCode, map<string, string> m_keywor
 		if (find(m_keyword.begin(), m_keyword.end(), temp_Code[i]) != m_keyword.end())
 		{
 			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("KEYWORD");
+			m_tokens.type.push_back("KEYWORD");
 			// Element in vector.
 		}
 		else if (find(m_separator.begin(), m_separator.end(), temp_Code[i]) != m_separator.end())
 		{
 			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("SEPARATOR");
+			m_tokens.type.push_back("SEPARATOR");
 			// Element in vector.
 		}
 		else if (find(m_op_dim.begin(), m_op_dim.end(), temp_Code[i]) != m_op_dim.end())
 		{
 			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("OP_DIMENSIONAL");
+			m_tokens.type.push_back("OP_DIMENSIONAL");
 			// Element in vector.
 		}
 		else if (find(m_digit.begin(), m_digit.end(),  s) != m_digit.end())
 		{
 			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("DIGIT");
+			m_tokens.type.push_back("DIGIT");
 		}
 		else if (find(m_op_log.begin(), m_op_log.end(), temp_Code[i]) != m_op_log.end())
 		{
 			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("OP_LOGICO");
+			m_tokens.type.push_back("OP_LOGICO");
 		}
 		else if (find(m_op_arit.begin(), m_op_arit.end(), temp_Code[i]) != m_op_arit.end())
 		{
 			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("OP_ARITMETICO");
+			m_tokens.type.push_back("OP_ARITMETICO");
 		}
 		else if (find(m_asignacion.begin(), m_asignacion.end(), temp_Code[i]) != m_asignacion.end())
 		{
 			m_tokens.Lexem.push_back(temp_Code[i]);
-			m_tokens.Type.push_back("ASIGNACION");
+			m_tokens.type.push_back("ASIGNACION");
 		}
 		//else if (find(m_simbolos.begin(), m_simbolos.end(), temp_Code[i]) != m_simbolos.end())
 		//{
@@ -465,7 +465,7 @@ void CStateManager::AsignType(const char * srcCode, map<string, string> m_keywor
 			if (temp_Code[i] != "" )
 			{
 				m_tokens.Lexem.push_back(temp_Code[i]);
-				m_tokens.Type.push_back("ID");
+				m_tokens.type.push_back("ID");
 			}
 		
 			std::size_t found = temp_Code[i].find("#");
@@ -507,7 +507,7 @@ void CStateManager::AsignType(const char * srcCode, map<string, string> m_keywor
 		}
 		out_string2 = to_string(line);
 		// Concatenate in strings the group of line, lexem and type
-		string ab = out_string2 + "@" + m_tokens.Lexem[i] + "@" + m_tokens.Type[i] + "@";
+		string ab = out_string2 + "@" + m_tokens.Lexem[i] + "@" + m_tokens.type[i] + "@";
 		BA.push_back(ab);
 	}
 	// Concatenate all the code in a single string
@@ -536,7 +536,7 @@ void CStateManager::keywordState()
 	if (m_keywords.count(NextBuffer) > 0)
 	{
 		m_tokens.Lexem.push_back(NextBuffer);
-		m_tokens.Type.push_back("KEYWORD");
+		m_tokens.type.push_back("KEYWORD");
 		NextBuffer.clear();
 		m_state = 0;
 	}
@@ -554,7 +554,7 @@ void CStateManager::IDState(int i)
 		char o = temp[i + 1];
 		string f(1, o);
 		m_tokens.Lexem.push_back(f);
-		m_tokens.Type.push_back("ID");
+		m_tokens.type.push_back("ID");
 		NextBuffer.clear();
 		m_state = 0;
 	}
@@ -571,7 +571,7 @@ void CStateManager::SeparatorState(int i)
 		char o = temp[i];
 		string f(1, o);
 		m_tokens.Lexem.push_back(CurrentBuffer);
-		m_tokens.Type.push_back("SEPARATOR");
+		m_tokens.type.push_back("SEPARATOR");
 		CurrentBuffer.clear();
 		NextBuffer.clear();
 		//NextBuffer = f[0];
@@ -588,7 +588,7 @@ void CStateManager::OPDimState(int i)
 		char o = temp[i];
 		string f(1, o);
 		m_tokens.Lexem.push_back(CurrentBuffer);
-		m_tokens.Type.push_back("OP_DIM");
+		m_tokens.type.push_back("OP_DIM");
 		NextBuffer.clear();
 		//NextBuffer = f[0];// Value between the OP_DIM
 		m_state = 0;
@@ -604,7 +604,7 @@ void CStateManager::DigitsState(int i)
 		char o = temp[i];
 		string f(1, o);
 		m_tokens.Lexem.push_back(NextBuffer);
-		m_tokens.Type.push_back("DIGITS");
+		m_tokens.type.push_back("DIGITS");
 		NextBuffer.clear();
 		//NextBuffer = f[0];
 		m_state = 0;

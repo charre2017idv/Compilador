@@ -24,13 +24,13 @@ c:\users\personal\documents\github\compilador\compiler\compiler\lexanalyzer.h(36
   SyntaxState_Program.cpp
 c:\users\personal\documents\github\compilador\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30C0' cannot be represented in the current code page (1252)
 c:\users\personal\documents\github\compilador\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30F3' cannot be represented in the current code page (1252)
+c:\users\personal\documents\github\compilador\compiler\compiler\syntaxstate_program.cpp(15): warning C4101: 'isChecking': unreferenced local variable
   SyntaxState_Var.cpp
 c:\users\personal\documents\github\compilador\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30C0' cannot be represented in the current code page (1252)
 c:\users\personal\documents\github\compilador\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30F3' cannot be represented in the current code page (1252)
   TabSymbol.cpp
   Token.cpp
   Generating Code...
-c:\users\personal\documents\github\compilador\compiler\compiler\syntaxstate_program.cpp(21): warning C4700: uninitialized local variable 'isChecking' used
   .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
   AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   Compiler.vcxproj -> C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\x64\Exe\Debug\Compilerx64d.dll

@@ -14,8 +14,9 @@ using namespace std;
 
 struct Tokens
 {
+  vector <string> line;
 	vector <string> Lexem;
-	vector <string> Type;
+	vector <string> type;
 };
 
 struct Errors

@@ -31,6 +31,8 @@ namespace CompilerUI
     List<String> WordsErr = new List<String>();
     List<String> ErrorsOpen = new List<String>();
 
+    String str;
+
     private void errorTok()
     {
       ErrorsOpen.Add("{");
@@ -38,12 +40,7 @@ namespace CompilerUI
       ErrorsOpen.Add("[");
       ErrorsOpen.Add("(");
     }
-
-    String str;
-    String ErrSrc;
-    String lexem;
-    String type;
-
+    
     public Form1()
     {
       isDLLLoaded = false;
@@ -131,7 +128,15 @@ namespace CompilerUI
         }
         if (LSymbols.Count == 7)
         {
-          dataGridView2.Rows.Add(LSymbols[0], LSymbols[1], LSymbols[2], LSymbols[3], LSymbols[4], LSymbols[5], LSymbols[6]);
+          dataGridView2.Rows.Add
+            (
+            LSymbols[0], 
+            LSymbols[1],
+            LSymbols[3], 
+            LSymbols[4], 
+            LSymbols[2], 
+            LSymbols[6]
+            );
 
           LSymbols.Clear();
         }
@@ -147,14 +152,14 @@ namespace CompilerUI
         String temp2 = output[0];
         textBox2.Text = temp2;
 
-        String Tokens = output[1];                                      // Temporal String for the concatenated string of the tokens
-        String Errors = output[2];                                      // Temporal String for the concatenated string of the tokens
-        String Symbols = output[3];                                     // Temporal String for the concatenated string of the tokens
-                                                                        //   textBox2.Text = "---------- Error List ----------";
+        String Tokens = output[1];                                              // Temporal String for the concatenated string of the tokens
+        String Errors = output[2];                                              // Temporal String for the concatenated string of the tokens
+        String Symbols = output[3];                                             // Temporal String for the concatenated string of the tokens
+                                                                                // textBox2.Text = "---------- Error List ----------";
         textBox2.Text = Errors;
         // Separate the string and get the values into the tokens grid
-        setTokenTable(Tokens);
-        setSymbolTable(Symbols);
+        setTokenTable(Tokens);                                                  // Present the tokens on Token grid
+        setSymbolTable(Symbols);                                                // Present the symbol Data on grid
 
       }
       else

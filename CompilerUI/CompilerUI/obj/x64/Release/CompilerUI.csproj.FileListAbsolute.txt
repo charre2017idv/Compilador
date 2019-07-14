@@ -10,7 +10,6 @@ C:\Users\personal\Documents\IDV17c\Cuatri 6\Compiladores\CompilerUI\CompilerUI\o
 C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\bin\x64\Release\CompilerUI.exe.config
 C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\bin\x64\Release\CompilerUI.exe
 C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\bin\x64\Release\CompilerUI.pdb
-C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Release\CompilerUI.csprojAssemblyReference.cache
 C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Release\CompilerUI.Form1.resources
 C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Release\CompilerUI.Properties.Resources.resources
 C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Release\CompilerUI.csproj.GenerateResource.cache

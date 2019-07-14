@@ -1,47 +1,25 @@
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\compilerx64d.pch
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\vc141.pdb
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\stdafx.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\token.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\tabsymbol.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\syntaxstate_var.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\syntaxstate_program.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\syntaxstate.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\syntaxanalysis.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\semanticanalysis.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\nodolocal.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\nodoglobal.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\lexanalyzer.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\errormodule.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\cstatemanager.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\compiler.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\assemblyinfo.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\.netframework,version=v4.6.1.assemblyattributes.obj
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\.netframework,version=v4.6.1.assemblyattributes.asm
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\exe\debug\compilerx64d.dll
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\exe\debug\compilerx64d.pdb
-c:\users\personal\documents\idv17c\cuatri 6\compiladores\compilerui\x64\intermediate\debug\app.res
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\compiler.vcxprojassemblyreference.cache
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\.netframework,version=v4.6.1.assemblyattributes.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\assemblyinfo.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\compiler.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\cstatemanager.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\errormodule.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\lexanalyzer.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\nodoglobal.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\nodolocal.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\semanticanalysis.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\stdafx.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\syntaxanalysis.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\syntaxstate.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\syntaxstate_program.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\syntaxstate_var.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\tabsymbol.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\token.obj
-c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\app.res
 c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\compilerx64d.pch
 c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\vc141.pdb
-c:\users\personal\documents\github\compilador\compilerui\x64\exe\debug\compilerx64d.pdb
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\stdafx.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\token.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\tabsymbol.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\syntaxstate_var.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\syntaxstate_program.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\syntaxstate.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\syntaxanalysis.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\semanticanalysis.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\nodolocal.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\nodoglobal.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\lexanalyzer.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\errormodule.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\cstatemanager.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\compiler.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\assemblyinfo.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\.netframework,version=v4.6.1.assemblyattributes.obj
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\.netframework,version=v4.6.1.assemblyattributes.asm
 c:\users\personal\documents\github\compilador\compilerui\x64\exe\debug\compilerx64d.dll
+c:\users\personal\documents\github\compilador\compilerui\x64\exe\debug\compilerx64d.pdb
+c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\app.res
 c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\compiler.tlog\cl.command.1.tlog
 c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\compiler.tlog\cl.read.1.tlog
 c:\users\personal\documents\github\compilador\compilerui\x64\intermediate\debug\compiler.tlog\cl.write.1.tlog

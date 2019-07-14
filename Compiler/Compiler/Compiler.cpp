@@ -67,7 +67,7 @@ cli::array<String^>^ Compiler::Manager::compileProgram(String ^ srcCode)
 	int arrSize = lex->m_tokens.Lexem.size();
 	compilationDetails = gcnew cli::array<String^>(arrSize);
 
-	for (size_t i = 0; i < err->m_errorsArray->Length; i++)						// Concatenate in strings the group of line, lexem and type of errors
+	for (size_t i = 0; i < err->m_errorsArray->Length; i++)						            // Concatenate in strings the group of line, lexem and type of errors
 	{ 
 		m_errorString += err->m_errorsArray[i] + "\r\n";
 	}

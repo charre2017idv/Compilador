@@ -13,7 +13,7 @@ void Compiler::SyntaxAnalysis::checkSyntax()
 {
 	SyntaxState_Program *Prog= new SyntaxState_Program(Lex,this,nullptr,"<PROGRAM>");
 	Prog->checkSyntax();
-	m_tempNodes = Prog->NODOLOCAL;
+	m_tempNodes = Prog->NODO;
 	vector <string> m_Temp_NodosLocales;
 	for (size_t i = 0; i < m_tempNodes.Line.size(); i++)
 	{
@@ -27,10 +27,20 @@ void Compiler::SyntaxAnalysis::checkSyntax()
 		{
 			l_category = "GLOBAL_VAR";
 		}
-
+    if (m_tempNodes.Category[i] == FUNCTION)
+    {
+      l_category = "FUNCTION";
+    }
+    if (m_tempNodes.Category[i] == PARAMETER)
+    {
+      l_category = "PARAMETER";
+    }
+    std::ostringstream ss;
+    ss << m_tempNodes.Dimension[i];
+    //std::string s(ss.str());
 		string temp = m_tempNodes.Line[i] + "@" + m_tempNodes.Name[i] +
 			"@" + m_tempNodes.Type[i] + "@" + l_category +
-			"@" + "0" + "@" + m_tempNodes.Function[i] + "@" + "<GLOBAL SCOPE>" + "@";
+			"@" + ss.str() + "@" + m_tempNodes.Function[i] + "@" + "<GLOBAL SCOPE>" + "@";
 
 		m_Temp_NodosLocales.push_back(temp);
 	}
