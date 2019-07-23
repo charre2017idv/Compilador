@@ -4,8 +4,10 @@ namespace Compiler {
 	{
 	public:
 		SemanticAnalysis();
-//		void addExpLog(vector<Token*> exp, string funcName);
+    //void addExpLog(vector<Token*> exp, string symbolToCheck, int symbolToUpdate, int lineNumber, string functionName);
 	//	void checkExpressions(); // Principal Method 
+  private:
+    //vector<explog> m_expresions;
 	};
 }
 

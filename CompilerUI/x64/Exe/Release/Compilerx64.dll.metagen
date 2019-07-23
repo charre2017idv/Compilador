@@ -14,6 +14,7 @@ Class Compiler.ErrorModule: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
   Fields:
     System.String[] m_errorsArray : Public
     Compiler.ERROR_PHASE lexError : Public
+    Compiler.ERROR_PHASE semanticError : Public
   Methods:
     clearErrors(): PrivateScope, Public, HideBySig
     addError(ERROR_PHASE, Int32, String, String): PrivateScope, Public, HideBySig

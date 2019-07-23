@@ -18,12 +18,14 @@ namespace Compiler {
 		LexAnalyzer *lexem;
 
 		int m_state = 0;
-		vector<NodoLocal> m_NodosLocales;
-		vector<string> m_Temp_NodosLocales;
+		//vector<NodoLocal> m_NodosLocales;
+		//vector<string> m_Temp_NodosLocales;
 		vector<string> m_simbols;
 		NL NODO;
 
 		string m_parsedNode;
+    string m_tempInFunc = "<GLOBAL SCOPE>";
+    int m_currIndex;
 
     string l_token;
     string l_str;
@@ -35,14 +37,30 @@ namespace Compiler {
     void 
     varState(int i);
     void
+    functionState(int i);
+    void
+    mainState(int i);
+    void
     readStringToken(int index,int state);
     void
-    AllocateSymbol(string line, string name, string type, SYMBOL_CAT category, string dimToken, int i, bool isFunc);
-
+    AllocateSymbol
+    (
+      string line, 
+      string name, 
+      string type, 
+      SYMBOL_CAT category, 
+      string dimToken, 
+      int i, 
+      bool isFunc,
+      string inFunction
+    );
     void 
-    CheckParameter(int i); // EXP LOG
+    Check_EXP_LOG(int i); // EXP LOG
     void
     CheckStatmentblock(int i);
+    void 
+    CheckforErrors(NL node, string currentSymbol, SYMBOL_CAT category);
+
 	};
 }
 

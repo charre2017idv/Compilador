@@ -40,7 +40,7 @@ void Compiler::SyntaxAnalysis::checkSyntax()
     //std::string s(ss.str());
 		string temp = m_tempNodes.Line[i] + "@" + m_tempNodes.Name[i] +
 			"@" + m_tempNodes.Type[i] + "@" + l_category +
-			"@" + ss.str() + "@" + m_tempNodes.Function[i] + "@" + "<GLOBAL SCOPE>" + "@";
+			"@" + ss.str() + "@" + m_tempNodes.Function[i] + "@" + m_tempNodes.Function[i] + "@";
 
 		m_Temp_NodosLocales.push_back(temp);
 	}

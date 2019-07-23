@@ -20,6 +20,7 @@ namespace Compiler {
 		ErrorModule();
 		cli::array<String^>^m_errorsArray;
 		ERROR_PHASE lexError = ERROR_PHASE::LEX_ANALYZER;
+		ERROR_PHASE semanticError = ERROR_PHASE::SEM_ANALYZER;
 		//~ErrorModule();
 	public:
 		void clearErrors(); //  debe de estar en todas las clases

@@ -113,7 +113,7 @@ namespace CompilerUI
 
     void setSymbolTable(string src)
     {
-      for (int i = 0; i < src.Length; i++)
+      for ( int i = 0; i < src.Length; i++)
       {
         if (src[i] != '@')
         {
