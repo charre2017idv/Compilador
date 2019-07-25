@@ -39,17 +39,22 @@ void Compiler::SyntaxState_Program::checkSyntax()
     {
       m_state = 3;
     }
+
+    if (!CurrToken.compare("if"))
+    {
+      m_state = 4;
+    }
     /////////////////////////////////////////
     // Analyze States
     // Var State
     if (m_state == 1)
     {
-      varState(i);
+      VARIABLE(i);
     }
     // function State
     if (m_state == 2)
     {
-      functionState(i);
+      FUNC(i);
       i = m_currIndex;
     }
     // main state
@@ -59,11 +64,56 @@ void Compiler::SyntaxState_Program::checkSyntax()
       i = m_currIndex;
     }
   }
-
+  // <! Warning :  Funciones deben de ser independientes para poderse llamar en cualquier momento de la ejecucion>
   
 }
+void Compiler::SyntaxState_Program::checkState(string delimiter_A, string delimiter_B, int i, bool isVar, bool isFunc, bool isMain, bool isParam, bool isStmblock)
+{
+  for (int j = i; j < Lex->m_tokens.Lexem.size(); j++)
+  {
+    string tempToken = Lex->m_tokens.Lexem[j];
+    /////////////////////////////////////////
+    // Change state condition
+    if (tempToken == delimiter_A)
+    {
+        m_state = 0;
+        break;
+    }
+    /////////////////////////////////////////
+    // Change state
+    if (isFunc || isMain)
+    {
+      if (tempToken == "(")
+      {
+        if (isFunc)
+        m_tempInFunc = Lex->m_tokens.Lexem[i + 1];
+        if (isMain)
+          m_tempInFunc = Lex->m_tokens.Lexem[i];
+        PARAM(j);
+        break;
+      }
+    }
+    /////////////////////////////////////////
+    // Allocate symbol condition
+    if (isVar)
+    {
+      vector <string > Conditions = { "var", ",","[","]","1","2","3","4","5","6","7","8","9", delimiter_A };
+      CompareToken(Conditions, tempToken, delimiter_A, delimiter_B, j, false, m_tempInFunc, GLOBAL_VAR);
+    }
+    if (isFunc)
+    {
+      vector<string> Conditions = { "function", "{","}","(",")",";" };
+      CompareToken(Conditions, tempToken,delimiter_A, delimiter_B, j, true, m_tempInFunc, FUNCTION);
+    }
+    if (isMain)
+    {
+      vector<string> Conditions = { "main", "{","}","(",")",";" };
+      CompareToken(Conditions, tempToken, delimiter_A, delimiter_B, j, true, m_tempInFunc, FUNCTION);
+    }
+  }
+}
 // Generate temp in function
-void Compiler::SyntaxState_Program::varState(int i)
+void Compiler::SyntaxState_Program::VARIABLE(int i)
 {
   for (int j = i; j < Lex->m_tokens.Lexem.size(); j++)
   {
@@ -73,17 +123,19 @@ void Compiler::SyntaxState_Program::varState(int i)
       m_state = 0;
       break;
     }
-    if (tempToken != "var" && tempToken != ","
-      && tempToken != "[" && tempToken != "]" && tempToken != "1" && tempToken != "2"
-      && tempToken != "3" && tempToken != "4" && tempToken != "5" && tempToken != "6"
-      && tempToken != "7" && tempToken != "8" && tempToken != "9" && tempToken != ":")
-    {
-      AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", GLOBAL_VAR, "[", j, false, m_tempInFunc);
-    }
+    vector <string > Conditions = { "var", ",","[","]","1","2","3","4","5","6","7","8","9", ":" };
+    CompareToken(Conditions, tempToken, ":", "[", j, false, m_tempInFunc, GLOBAL_VAR);
+//     if (tempToken != "var" && tempToken != ","
+//       && tempToken != "[" && tempToken != "]" && tempToken != "1" && tempToken != "2"
+//       && tempToken != "3" && tempToken != "4" && tempToken != "5" && tempToken != "6"
+//       && tempToken != "7" && tempToken != "8" && tempToken != "9" && tempToken != ":")
+//     {
+//       AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", GLOBAL_VAR, "[", j, false, m_tempInFunc);
+//     }
   }
 }
 
-void Compiler::SyntaxState_Program::functionState(int i)
+void Compiler::SyntaxState_Program::FUNC(int i)
 {
   for (int j = i; j < Lex->m_tokens.Lexem.size(); j++)
   {
@@ -97,16 +149,18 @@ void Compiler::SyntaxState_Program::functionState(int i)
     if (tempToken == "(")
     {
       m_tempInFunc = Lex->m_tokens.Lexem[i + 1];
-      Check_EXP_LOG(j);
+      PARAM(j);
       break;
     }
+    vector<string> Conditions = { "function", "{","}","(",")",";" };
+    CompareToken(Conditions, tempToken, ":", "", j, true, m_tempInFunc, FUNCTION);
     // If token is different that 'var' or numbers
-    if (tempToken != "function" && tempToken != "{"
-      && tempToken != "}" && tempToken != ";"
-      && tempToken != "(" && tempToken != ")")			                    // If the token isn't a reserved word, it will allocate the info in local node
-    {
-      AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", FUNCTION, "", j, true, m_tempInFunc);
-    }
+//     if (tempToken != "function" && tempToken != "{"
+//       && tempToken != "}" && tempToken != ";"
+//       && tempToken != "(" && tempToken != ")")			                    // If the token isn't a reserved word, it will allocate the info in local node
+//     {
+//       AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", FUNCTION, "", j, true, m_tempInFunc);
+//     }
   }
 }
 
@@ -123,17 +177,19 @@ void Compiler::SyntaxState_Program::mainState(int i)
     }
     if (tempToken == "(")
     {
-      m_tempInFunc = Lex->m_tokens.Lexem[i ];
-      Check_EXP_LOG(j);
+      m_tempInFunc = Lex->m_tokens.Lexem[i];
+      PARAM(j);
       break;
     }
     // If token is different that 'var' or numbers
-    if (tempToken != "main" && tempToken != "{"
-      && tempToken != "}" && tempToken != ";"
-      && tempToken != "(" && tempToken != ")")			                    // If the token isn't a reserved word, it will allocate the info in local node
-    {
-      AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", FUNCTION, "", j, true, m_tempInFunc);
-    }
+//     if (tempToken != "main" && tempToken != "{"
+//       && tempToken != "}" && tempToken != ";"
+//       && tempToken != "(" && tempToken != ")")			                    // If the token isn't a reserved word, it will allocate the info in local node
+//     {
+//       AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", FUNCTION, "", j, true, m_tempInFunc);
+//     }
+    vector<string> Conditions = { "main", "{","}","(",")",";" };
+    CompareToken(Conditions, tempToken, ":", "", j, true, m_tempInFunc, FUNCTION);
   }
 }
 
@@ -204,28 +260,30 @@ void Compiler::SyntaxState_Program::AllocateSymbol(string line, string name, str
   NODO.Value.push_back(nullptr);						                                // Allocate the value, necessary for P3
 }
 
-void Compiler::SyntaxState_Program::Check_EXP_LOG(int i)
+void Compiler::SyntaxState_Program::PARAM(int i)
 {
   for (int j = i; j < Lex->m_tokens.Lexem.size(); j++)
   {
     string tempToken = Lex->m_tokens.Lexem[j];
     if (tempToken == "{")
     {
-      CheckStatmentblock(j);
+      STATEMENT_BLOCK(j);
       break;
     }
-    if (tempToken != "(" && tempToken != ")" && tempToken != ":" 
-      && tempToken != "," && tempToken != "\n"
-      && tempToken != "int"   && tempToken != "bool" 
-      && tempToken != "float" && tempToken != "var")
-    {
-      AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", PARAMETER, "[", j, false, m_tempInFunc);
-    }
+    vector<string> Conditions = { "int","float","bool","var", ",","\n","(",")",";",":"  };
+    CompareToken(Conditions, tempToken, ":", "[", j, false, m_tempInFunc, PARAMETER);
+//     if (tempToken != "(" && tempToken != ")" && tempToken != ":" 
+//       && tempToken != "," && tempToken != "\n"
+//       && tempToken != "int"   && tempToken != "bool" 
+//       && tempToken != "float" && tempToken != "var")
+//     {
+//       AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", PARAMETER, "[", j, false, m_tempInFunc);
+//     }
     
   }
 }
 
-void Compiler::SyntaxState_Program::CheckStatmentblock(int i)
+void Compiler::SyntaxState_Program::STATEMENT_BLOCK(int i)
 {
   for (int j = i; j < Lex->m_tokens.Lexem.size(); j++)
   {
@@ -237,16 +295,21 @@ void Compiler::SyntaxState_Program::CheckStatmentblock(int i)
       m_state = 0;
       break;
     }
-    if (tempToken != "var" && tempToken != ","&& tempToken != "{" && tempToken != "}"
-      && tempToken != "[" && tempToken != "]" && tempToken != "1" && tempToken != "2"
-      && tempToken != "3" && tempToken != "4" && tempToken != "5" && tempToken != "6"
-      && tempToken != "7" && tempToken != "8" && tempToken != "9" && tempToken != ":"
-      && tempToken != "0" && tempToken != "\n" && tempToken != "int" && tempToken != "bool"
-      && tempToken != "var"&& tempToken != "float"&& tempToken != ";" && tempToken != "string"
-      && tempToken != "return" && tempToken != "false" && tempToken != "true")
-    {
-      AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", LOCAL_VAR, "[", j, false, m_tempInFunc);
-    }
+    vector <string > Conditions = { 
+      "\n", ",","[","]","{","}", ":",";"
+      "0", "1","2","3","4","5","6","7","8","9",
+      "var", "float", "int", "bool","string", "return", "false", "true" };
+    CompareToken(Conditions, tempToken, ":", "[", j, false, m_tempInFunc, LOCAL_VAR);
+//     if (tempToken != "var" && tempToken != ","&& tempToken != "{" && tempToken != "}"
+//       && tempToken != "[" && tempToken != "]" && tempToken != "1" && tempToken != "2"
+//       && tempToken != "3" && tempToken != "4" && tempToken != "5" && tempToken != "6"
+//       && tempToken != "7" && tempToken != "8" && tempToken != "9" && tempToken != ":"
+//       && tempToken != "0" && tempToken != "\n" && tempToken != "int" && tempToken != "bool"
+//       && tempToken != "var"&& tempToken != "float"&& tempToken != ";" && tempToken != "string"
+//       && tempToken != "return" && tempToken != "false" && tempToken != "true")
+//     {
+//       AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", LOCAL_VAR, "[", j, false, m_tempInFunc);
+//     }
 
   }
 }
@@ -264,6 +327,21 @@ void Compiler::SyntaxState_Program::CheckforErrors(NL node, string currentSymbol
       int n = std::stoi(node.Line[i]);
       Lex->m_refErrorMod->addError(Lex->m_refErrorMod->semanticError, n, Error, ErrorDesc);
     }
+  }
+}
+
+void Compiler::SyntaxState_Program::IF(int i, SYMBOL_CAT category)
+{
+  for (int j = i; j < Lex->m_tokens.Lexem.size(); j++)
+  {
+    string tempToken = Lex->m_tokens.Lexem[j];
+    if (tempToken == "(")
+    {
+      PARAM(j);
+      break;
+    }
+    vector<string> Conditions = { "if", "{","}","(",")",";" };
+    CompareToken(Conditions, tempToken, ":", "", j, true, m_tempInFunc, category);
   }
 }
 
