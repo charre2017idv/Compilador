@@ -87,6 +87,9 @@
     <ClInclude Include="SyntaxState_Var.h">
       <Filter>Header Files\SynAnalysis</Filter>
     </ClInclude>
+    <ClInclude Include="SemanticTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="SyntaxState_Var.cpp">
       <Filter>Source Files\SynAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="SemanticTree.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

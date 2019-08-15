@@ -15,6 +15,8 @@ c:\users\personal\documents\github\compilador\compiler\compiler\lexanalyzer.cpp(
   NodoGlobal.cpp
   NodoLocal.cpp
   SemanticAnalysis.cpp
+  SemanticTree.cpp
+c:\users\personal\documents\github\compilador\compiler\compiler\semantictree.cpp(41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   SyntaxAnalysis.cpp
 c:\users\personal\documents\github\compilador\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30C0' cannot be represented in the current code page (1252)
 c:\users\personal\documents\github\compilador\compiler\compiler\lexanalyzer.h(36): warning C4566: character represented by universal-character-name '\u30F3' cannot be represented in the current code page (1252)
@@ -31,6 +33,7 @@ c:\users\personal\documents\github\compilador\compiler\compiler\lexanalyzer.h(36
   TabSymbol.cpp
   Token.cpp
   Generating Code...
+c:\users\personal\documents\github\compilador\compiler\compiler\syntaxstate_program.cpp(153): warning C4700: uninitialized local variable 'temp' used
   .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
   AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   Compiler.vcxproj -> C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\x64\Exe\Debug\Compilerx64d.dll

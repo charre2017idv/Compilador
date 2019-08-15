@@ -23,9 +23,9 @@ namespace Compiler {
 	public:
 		Token m_Token;
 		msclr::gcroot<ErrorModule^> m_refErrorMod;
-		vector <string> m_keyword = { "var", "int","float","main","string","bool","void","function","for","while","if","else","switch","case","default","print","read","return","true","flase","inc","dec" };
+		vector <string> m_keyword = { "var", "int","float","main","string","bool","void","function","for","while","if","else","switch","case","default","print","read","return","true","false","inc","dec" };
 		vector <string> m_separator = { ";",":", "," };
-		vector <string> m_op_arit = { "+","-","*","/","%" };
+		vector <string> m_op_arit = { "+","-","*","/","%", "<", ">" };
 		vector <string> m_op_grup = { "{","}","(",")" };
 		vector <string> m_op_dim = { "[","]" };
 		vector <string> m_op_log = { "!","||","&&","=="};
@@ -34,7 +34,7 @@ namespace Compiler {
 		vector <char> m_letters= { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z' };
 		vector <string> m_asignacion = { "=" };
 		vector <string> m_simbolos = { "#","$","@","ñ","Ñ","~", "¼" , "^", "¬","ダダン"};
-		vector <char> m_general = { ';',':', ',','.','+','-','*','/','%','{','}','(',')','[',']','!','0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','=',' ','\t','\n','"','&'};
+		vector <char> m_general = { '<', '>',';',':', ',','.','+','-','*','/','%','{','}','(',')','[',']','!','0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','=',' ','\t','\n','"','&'};
 
 		vector<string> temp_Code;
 		vector<string> LLT;

@@ -3,6 +3,7 @@
 #include "LexAnalyzer.h"
 #include "SyntaxAnalysis.h"
 #include "NodoLocal.h"
+#include "SemanticTree.h"
 #define CompareToken(Vec,token, delemiter_A, delemiter_B, indind, condition, tempFunc, Cat) \
    if (count(Vec.begin(), Vec.end(), token))\
    {\
@@ -26,8 +27,9 @@ namespace Compiler {
 		//vector<NodoLocal> m_NodosLocales;
 		//vector<string> m_Temp_NodosLocales;
 		vector<string> m_simbols;
+		vector<string> m_ExpLog;
 		NL NODO;
-
+    SemanticTree SemTree;
 		string m_parsedNode;
     string m_tempInFunc = "<GLOBAL SCOPE>";
     int m_currIndex;
@@ -43,10 +45,12 @@ namespace Compiler {
     checkState(string delimiter_A, string delimiter_B, int i, bool isVar, bool isFunc, bool isMain, bool isParam, bool isStmblock);
     void 
     VARIABLE(int i);
+    int
+    VARIABLE(int i, SYMBOL_CAT category);
     void
     FUNC(int i);
     void
-      mainState(int i);
+    mainState(int i);
     void
       readStringToken(int index, int state);
     void
@@ -66,7 +70,9 @@ namespace Compiler {
     void
     STATEMENT_BLOCK(int i);
     void 
-    CheckforErrors(NL node, string currentSymbol, SYMBOL_CAT category);
+    CheckforErrors(NL node, string currentSymbol, SYMBOL_CAT category, bool isLocal, bool isGlobal, bool isFunc);
+    int EXPLOG(int i);
+    void IF(int i);
     void IF(int i, SYMBOL_CAT category);
     void FOR(int i);
     void WHILE(int i);

@@ -16,4 +16,3 @@ C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debu
 C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.csproj.CoreCompileInputs.cache
 C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.exe
 C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.pdb
-C:\Users\personal\Documents\GitHub\Compilador\CompilerUI\CompilerUI\obj\x64\Debug\CompilerUI.csprojAssemblyReference.cache

@@ -82,7 +82,7 @@ bool Compiler::LexAnalyzer::parseSourceCode(const char * srcCode)
 		if (m_state == 0)
 		{
 			// Simbolors, op_log, separadores
-			if (currentToken == ',' || currentToken == ':' || currentToken == ';' || currentToken == '\n' || currentToken == '(' || currentToken == ')' || currentToken == '[' || currentToken == ']' || currentToken == '{' || currentToken == '}' || currentToken == '+' || currentToken == '-' || currentToken == '/' || currentToken == '*' || currentToken == '!' || currentToken == '^' || currentToken == '@' || currentToken == '$' || currentToken == '#' || currentToken == '_' )
+			if (currentToken == ',' || currentToken == ':' || currentToken == ';' || currentToken == '\n' || currentToken == '(' || currentToken == ')' || currentToken == '[' || currentToken == ']' || currentToken == '{' || currentToken == '}' || currentToken == '+' || currentToken == '-' || currentToken == '/' || currentToken == '*' || currentToken == '!' || currentToken == '^' || currentToken == '@' || currentToken == '$' || currentToken == '#' || currentToken == '_' || currentToken == '<' || currentToken == '>')
 			{
 				m_state = 2;
 			}

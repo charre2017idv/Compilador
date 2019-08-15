@@ -63,9 +63,15 @@ void Compiler::SyntaxState_Program::checkSyntax()
       mainState(i);
       i = m_currIndex;
     }
+
+    if (m_state == 4)
+    {
+      IF(i);
+      i = m_currIndex;
+    }
   }
   // <! Warning :  Funciones deben de ser independientes para poderse llamar en cualquier momento de la ejecucion>
-  
+  SemTree.getExplog(m_ExpLog, NODO);
 }
 void Compiler::SyntaxState_Program::checkState(string delimiter_A, string delimiter_B, int i, bool isVar, bool isFunc, bool isMain, bool isParam, bool isStmblock)
 {
@@ -133,6 +139,24 @@ void Compiler::SyntaxState_Program::VARIABLE(int i)
 //       AllocateSymbol(Lex->m_tokens.line[j], tempToken, ":", GLOBAL_VAR, "[", j, false, m_tempInFunc);
 //     }
   }
+}
+
+int Compiler::SyntaxState_Program::VARIABLE(int i, SYMBOL_CAT category)
+{
+  int temp;
+  for (int j = i; j < Lex->m_tokens.Lexem.size(); j++)
+  {
+    string tempToken = Lex->m_tokens.Lexem[j];
+    if (tempToken == ":")
+    {
+      //m_state = 0;
+      j = temp;
+      break;
+    }
+    vector <string > Conditions = { "var", ",","[","]","1","2","3","4","5","6","7","8","9", ":" };
+    CompareToken(Conditions, tempToken, ":", "[", j, false, m_tempInFunc, category);
+  }
+  return temp;
 }
 
 void Compiler::SyntaxState_Program::FUNC(int i)
@@ -216,8 +240,9 @@ void Compiler::SyntaxState_Program::mainState(int i)
 
 void Compiler::SyntaxState_Program::AllocateSymbol(string line, string name, string tpToken, SYMBOL_CAT category, string dimToken, int i, bool isFunc, string inFunction)
 {
-  CheckforErrors(NODO, name, GLOBAL_VAR); // Check for Equal global variables
-  CheckforErrors(NODO, name, FUNCTION); // Check for Equal functions
+  CheckforErrors(NODO, name, LOCAL_VAR,true,false,false); // Check for Equal functions
+  CheckforErrors(NODO, name, GLOBAL_VAR,false,true,false); // Check for Equal global variables
+  CheckforErrors(NODO, name, FUNCTION,false,false,true); // Check for Equal functions
   // Allocate the token line
   NODO.Line.push_back(line);					                                      // Allocate the line of token
   /////////////////////////////////////////
@@ -295,11 +320,25 @@ void Compiler::SyntaxState_Program::STATEMENT_BLOCK(int i)
       m_state = 0;
       break;
     }
-    vector <string > Conditions = { 
-      "\n", ",","[","]","{","}", ":",";"
-      "0", "1","2","3","4","5","6","7","8","9",
-      "var", "float", "int", "bool","string", "return", "false", "true" };
-    CompareToken(Conditions, tempToken, ":", "[", j, false, m_tempInFunc, LOCAL_VAR);
+    if (tempToken == "var")
+    {
+      int temp;
+      temp = VARIABLE(j, LOCAL_VAR);
+      j = temp;
+    }
+    if (tempToken == "if")
+    {
+      IF(j, LOCAL_VAR);
+    }
+    if (tempToken == "return")
+    {
+      // return state ...
+    }
+//     vector <string > Conditions = { 
+//       "\n", ",","[","]","{","}", ":",";"
+//       "0", "1","2","3","4","5","6","7","8","9",
+//       "var", "float", "int", "bool","string", "return", "false", "true" };
+//     CompareToken(Conditions, tempToken, ":", "[", j, false, m_tempInFunc, LOCAL_VAR);
 //     if (tempToken != "var" && tempToken != ","&& tempToken != "{" && tempToken != "}"
 //       && tempToken != "[" && tempToken != "]" && tempToken != "1" && tempToken != "2"
 //       && tempToken != "3" && tempToken != "4" && tempToken != "5" && tempToken != "6"
@@ -314,20 +353,67 @@ void Compiler::SyntaxState_Program::STATEMENT_BLOCK(int i)
   }
 }
 
-void Compiler::SyntaxState_Program::CheckforErrors(NL node, string currentSymbol, SYMBOL_CAT category)
+void Compiler::SyntaxState_Program::CheckforErrors(NL node, string currentSymbol, SYMBOL_CAT category, bool isLocal, bool isGlobal, bool isFunc)
 {// SymbolName, category
   for (int i = 0; i < node.Name.size(); i++)
   {
-    if (node.Name[i] == currentSymbol && node.Category[i] == category)
+    if (isGlobal)
     {
-      // Allocate Error
-      String^ ErrorDesc = gcnew String(currentSymbol.c_str());
-      String^ Error;
-      Error = "Variable/Function already defined in the same scope";
-      int n = std::stoi(node.Line[i]);
-      Lex->m_refErrorMod->addError(Lex->m_refErrorMod->semanticError, n, Error, ErrorDesc);
+      if (node.Name[i] == currentSymbol && node.Category[i] == category) 
+      {
+        String^ ErrorDesc = gcnew String(currentSymbol.c_str());
+        String^ Error;
+        Error = "Variable/Function already defined in the same scope";
+        int n = std::stoi(node.Line[i]);
+        Lex->m_refErrorMod->addError(Lex->m_refErrorMod->semanticError, n, Error, ErrorDesc);
+      }
+    }
+    if (isLocal)
+    {
+      if (node.Name[i] == currentSymbol && node.Category[i] == category)
+      {
+        String^ ErrorDesc = gcnew String(currentSymbol.c_str());
+        String^ Error;
+        Error = "Variable/Function already defined in the same scope";
+        int n = std::stoi(node.Line[i]);
+        Lex->m_refErrorMod->addError(Lex->m_refErrorMod->semanticError, n, Error, ErrorDesc);
+      }
+    }
+    if (isFunc)
+    {
+      if (node.Name[i] == currentSymbol && node.Category[i] == category)
+      {
+        String^ ErrorDesc = gcnew String(currentSymbol.c_str());
+        String^ Error;
+        Error = "Variable/Function already defined in the same scope";
+        int n = std::stoi(node.Line[i]);
+        Lex->m_refErrorMod->addError(Lex->m_refErrorMod->semanticError, n, Error, ErrorDesc);
+      }
     }
   }
+}
+
+int Compiler::SyntaxState_Program::EXPLOG(int i)
+{
+  int temp;
+  string fullTok;
+  for (int j = i; j < Lex->m_tokens.Lexem.size(); j++)
+  {
+    string tempToken = Lex->m_tokens.Lexem[j+1];
+    if (Lex->m_tokens.Lexem[j+1] != "{")
+    {
+      fullTok += tempToken;
+    }
+    else
+    {
+      break;
+    }
+    temp = j;
+  }
+
+  m_ExpLog.push_back(fullTok);
+
+  return temp;
 }
 
 void Compiler::SyntaxState_Program::IF(int i, SYMBOL_CAT category)
@@ -337,11 +423,30 @@ void Compiler::SyntaxState_Program::IF(int i, SYMBOL_CAT category)
     string tempToken = Lex->m_tokens.Lexem[j];
     if (tempToken == "(")
     {
-      PARAM(j);
+      // EXP_LOG 
+      m_tempInFunc = Lex->m_tokens.Lexem[i];
+      j = EXPLOG(i);
+      //PARAM(j);
       break;
     }
     vector<string> Conditions = { "if", "{","}","(",")",";" };
     CompareToken(Conditions, tempToken, ":", "", j, true, m_tempInFunc, category);
+  }
+}
+
+void Compiler::SyntaxState_Program::IF(int i)
+{
+  for (int j = i; j < Lex->m_tokens.Lexem.size(); j++)
+  {
+    string tempToken = Lex->m_tokens.Lexem[j];
+    if (tempToken == "(")
+    {
+      m_tempInFunc = Lex->m_tokens.Lexem[i];
+      PARAM(j);
+      break;
+    }
+    vector<string> Conditions = { "if", "{","}","(",")",";" };
+    CompareToken(Conditions, tempToken, ":", "", j, true, m_tempInFunc, GLOBAL_VAR);
   }
 }
 
